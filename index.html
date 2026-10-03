@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kingshot Speedup Calculator</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f4f7;
+            color: #222;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .time-grid,
+        .speedup-row {
+            display: grid;
+            grid-template-columns: 1fr 120px;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .category {
+            margin-top: 20px;
+        }
+
+        .category h3 {
+            margin-bottom: 12px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: #4f46e5;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4338ca;
+        }
+
+        .result {
+            background: #eef2ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 12px;
+        }
+
+        .result-title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .big-number {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .small {
+            color: #555;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 12px;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .time-grid,
+            .speedup-row {
+                grid-template-columns: 1fr 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>⚔️ Kingshot Speedup Calculator</h1>
+    <div class="subtitle">
+        Calculate the total time represented by your speedups
+    </div>
+
+    <div class="card">
+        <h2>⏱️ Time Required</h2>
+
+        <div class="time-grid">
+            <label for="days">Days</label>
+            <input type="number" id="days" min="0" value="0">
+        </div>
+
+        <div class="time-grid">
+            <label for="hours">Hours</label>
+            <input type="number" id="hours" min="0" value="0">
+        </div>
+
+        <div class="time-grid">
+            <label for="minutes">Minutes</label>
+            <input type="number" id="minutes" min="0" value="0">
+        </div>
+
+        <div class="time-grid">
+            <label for="seconds">Seconds</label>
+            <input type="number" id="seconds" min="0" value="0">
+        </div>
+    </div>
+
+
+    <div class="card">
+        <h2>⚡ Speedups</h2>
+
+        <div class="category">
+            <h3>🟣 General</h3>
+
+            <div class="speedup-row">
+                <label>1 minute</label>
+                <input type="number" id="general1m" min="0" value="0">
+            </div>
+
+            <div class="speedup-row">
+                <label>5 minutes</label>
+                <input type="number" id="general5m" min="0" value="0">
+            </div>
+
+            <div class="speedup-row">
+                <label>1 hour</label>
+                <input type="number" id="general1h" min="0" value="0">
+            </div>
+
+            <div class="speedup-row">
+                <label>3 hours</label>
+                <input type="number" id="general3h" min="0" value="0">
+            </div>
+
+            <div class="speedup-row">
+                <label>8 hours</label>
+                <input type="number" id="general8h" min="0" value="0">
+            </div>
+        </div>
+
+
+        <div class="category">
+            <h3>🏗️ Construction</h3>
+
+            <div class="speedup-row">
+                <label>1 minute</label>
+                <input type="number" id="construction1m" min="0" value="0">
+            </div>
+
+            <div class="speedup-row">
+                <label>5 minutes</label>
+                <input type="number" id="construction5m" min="0" value="0">
+            </div>
+
+            <div class="speedup-row">
+                <label>1 hour</label>
+                <input type="number" id="construction1h" min="0" value="0">
+            </div>
+        </div>
+
+
+        <div class="category">
+            <h3>🔬 Research</h3>
+
+            <div class="speedup-row">
+                <label>1 minute</label>
+                <input type="number" id="research1m" min="0" value="0">
+            </div>
+
+            <div class="speedup-row">
+                <label>5 minutes</label>
+                <input type="number" id="research5m" min="0" value="0">
+            </div>
+
+            <div class="speedup-row">
+                <label>1 hour</label>
+                <input type="number" id="research1h" min="0" value="0">
+            </div>
+        </div>
+
+
+        <div class="category">
+            <h3>⚔️ Troops</h3>
+
+            <div class="speedup-row">
+                <label>1 minute</label>
+                <input type="number" id="troop1m" min="0" value="0">
+            </div>
+
+            <div class="speedup-row">
+                <label>5 minutes</label>
+                <input type="number" id="troop5m" min="0" value="0">
+            </div>
+
+            <div class="speedup-row">
+                <label>1 hour</label>
+                <input type="number" id="troop1h" min="0" value="0">
+            </div>
+        </div>
+
+    </div>
+
+
+    <button onclick="calculate()">CALCULATE</button>
+
+
+    <div class="card" id="results" style="display:none; margin-top:20px;">
+
+        <h2>📊 Results</h2>
+
+        <div class="result">
+            <div class="result-title">General Speedups</div>
+            <div class="big-number" id="generalResult"></div>
+            <div class="small" id="generalDays"></div>
+        </div>
+
+        <div class="result">
+            <div class="result-title">Construction Speedups</div>
+            <div class="big-number" id="constructionResult"></div>
+            <div class="small" id="constructionDays"></div>
+        </div>
+
+        <div class="result">
+            <div class="result-title">Research Speedups</div>
+            <div class="big-number" id="researchResult"></div>
+            <div class="small" id="researchDays"></div>
+        </div>
+
+        <div class="result">
+            <div class="result-title">Troop Speedups</div>
+            <div class="big-number" id="troopResult"></div>
+            <div class="small" id="troopDays"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function getValue(id) {
+    return Number(document.getElementById(id).value) || 0;
+}
+
+
+function formatTime(hours) {
+
+    const totalSeconds = Math.round(hours * 3600);
+
+    const days = Math.floor(totalSeconds / 86400);
+    const remainingAfterDays = totalSeconds % 86400;
+
+    const hrs = Math.floor(remainingAfterDays / 3600);
+    const remainingAfterHours = remainingAfterDays % 3600;
+
+    const mins = Math.floor(remainingAfterHours / 60);
+    const secs = remainingAfterHours % 60;
+
+    let result = "";
+
+    if (days > 0) result += days + "d ";
+    if (hrs > 0 || days > 0) result += hrs + "h ";
+    if (mins > 0 || hrs > 0 || days > 0) result += mins + "m ";
+    if (secs > 0 || result === "") result += secs + "s";
+
+    return result.trim();
+}
+
+
+function calculate() {
+
+    // GENERAL
+    const generalMinutes =
+        getValue("general1m") * 1 +
+        getValue("general5m") * 5 +
+        getValue("general1h") * 60 +
+        getValue("general3h") * 180 +
+        getValue("general8h") * 480;
+
+    // CONSTRUCTION
+    const constructionMinutes =
+        getValue("construction1m") * 1 +
+        getValue("construction5m") * 5 +
+        getValue("construction1h") * 60;
+
+    // RESEARCH
+    const researchMinutes =
+        getValue("research1m") * 1 +
+        getValue("research5m") * 5 +
+        getValue("research1h") * 60;
+
+    // TROOPS
+    const troopMinutes =
+        getValue("troop1m") * 1 +
+        getValue("troop5m") * 5 +
+        getValue("troop1h") * 60;
+
+
+    const generalHours = generalMinutes / 60;
+    const constructionHours = constructionMinutes / 60;
+    const researchHours = researchMinutes / 60;
+    const troopHours = troopMinutes / 60;
+
+
+    document.getElementById("generalResult").textContent =
+        generalHours.toLocaleString(undefined, {
+            maximumFractionDigits: 2
+        }) + " hours";
+
+    document.getElementById("generalDays").textContent =
+        formatTime(generalHours);
+
+
+    document.getElementById("constructionResult").textContent =
+        constructionHours.toLocaleString(undefined, {
+            maximumFractionDigits: 2
+        }) + " hours";
+
+    document.getElementById("constructionDays").textContent =
+        formatTime(constructionHours);
+
+
+    document.getElementById("researchResult").textContent =
+        researchHours.toLocaleString(undefined, {
+            maximumFractionDigits: 2
+        }) + " hours";
+
+    document.getElementById("researchDays").textContent =
+        formatTime(researchHours);
+
+
+    document.getElementById("troopResult").textContent =
+        troopHours.toLocaleString(undefined, {
+            maximumFractionDigits: 2
+        }) + " hours";
+
+    document.getElementById("troopDays").textContent =
+        formatTime(troopHours);
+
+
+    document.getElementById("results").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
