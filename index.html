@@ -103,7 +103,7 @@
     /* General speedup symbol */
 
     .general-icon {
-        color: #3d73b9;
+        color: #3570b4;
 
         font-weight: 900;
 
@@ -263,7 +263,518 @@
     }
 
 
-       <!-- =========================
+    /* =========================
+       RESULTS
+       ========================= */
+
+    .results {
+        display: none;
+    }
+
+
+    .results-title {
+        text-align: center;
+
+        margin: 5px 0 12px;
+
+        font-size: 22px;
+
+        font-weight: 800;
+
+        color: #4a3521;
+    }
+
+
+    /* =========================
+       TIME FORMAT TOGGLE
+       ========================= */
+
+    .time-toggle {
+        display: flex;
+
+        justify-content: center;
+
+        margin: 0 auto 14px;
+
+        width: fit-content;
+
+        background: #ddd4c3;
+
+        border: 1px solid #c4b79f;
+
+        border-radius: 8px;
+
+        padding: 3px;
+    }
+
+
+    .toggle-button {
+        border: none;
+
+        border-radius: 6px;
+
+        padding: 7px 18px;
+
+        font-size: 14px;
+
+        font-weight: 700;
+
+        color: #66523a;
+
+        background: transparent;
+
+        cursor: pointer;
+    }
+
+
+    .toggle-button.active {
+        color: white;
+
+        background: #7b5a2b;
+
+        box-shadow:
+            0 1px 3px rgba(0,0,0,0.2);
+    }
+
+
+    .toggle-button:hover:not(.active) {
+        background: rgba(255,255,255,0.45);
+    }
+
+
+    /* =========================
+       RESULT CARDS
+       ========================= */
+
+    .result-card {
+        background: rgba(255, 252, 244, 0.97);
+
+        border: 1px solid #c9b58f;
+
+        border-radius: 12px;
+
+        padding: 15px;
+
+        margin-bottom: 11px;
+
+        text-align: center;
+
+        box-shadow:
+            0 2px 5px rgba(60,40,15,0.15);
+    }
+
+
+    .result-title {
+        font-size: 17px;
+
+        font-weight: 800;
+
+        color: #66523a;
+
+        margin-bottom: 5px;
+    }
+
+
+    .result-time {
+        font-size: 32px;
+
+        font-weight: 900;
+
+        color: #4a3521;
+
+        line-height: 1.2;
+    }
+
+
+    /* General result */
+
+    .general-result .result-title {
+        color: #3570b4;
+    }
+
+
+    .general-result .result-time {
+        color: #3570b4;
+    }
+
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 450px) {
+
+        .container {
+            padding: 14px 9px 30px;
+        }
+
+
+        h1 {
+            font-size: 24px;
+        }
+
+
+        .category-card {
+            padding: 12px;
+        }
+
+
+        .speedup-row {
+            grid-template-columns: 1fr 100px;
+        }
+
+
+        .result-time {
+            font-size: 28px;
+        }
+
+    }
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =========================
+         HEADER
+         ========================= -->
+
+    <header>
+
+        <h1>
+            ⚔️ Kingshot Speedup Calculator
+        </h1>
+
+        <div class="subtitle">
+            Enter your speedups to see your total time
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         GENERAL
+         ========================= -->
+
+    <div class="category-card">
+
+        <h2 class="category-title">
+
+            <span class="general-icon">❯❯</span>
+
+            General Speedups
+
+        </h2>
+
+
+        <div class="speedup-row speedup-1m">
+
+            <div class="speedup-label">
+                1 minute
+            </div>
+
+            <input
+                type="number"
+                id="general1m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+
+        <div class="speedup-row speedup-5m">
+
+            <div class="speedup-label">
+                5 minutes
+            </div>
+
+            <input
+                type="number"
+                id="general5m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+
+        <div class="speedup-row speedup-1h">
+
+            <div class="speedup-label">
+                1 hour
+            </div>
+
+            <input
+                type="number"
+                id="general1h"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+
+        <div class="speedup-row speedup-3h">
+
+            <div class="speedup-label">
+                3 hours
+            </div>
+
+            <input
+                type="number"
+                id="general3h"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+
+        <div class="speedup-row speedup-8h">
+
+            <div class="speedup-label">
+                8 hours
+            </div>
+
+            <input
+                type="number"
+                id="general8h"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         CONSTRUCTION
+         ========================= -->
+
+    <div class="category-card">
+
+        <h2 class="category-title">
+
+            🔨 Construction Speedups
+
+        </h2>
+
+
+        <div class="speedup-row speedup-1m">
+
+            <div class="speedup-label">
+                1 minute
+            </div>
+
+            <input
+                type="number"
+                id="construction1m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+
+        <div class="speedup-row speedup-5m">
+
+            <div class="speedup-label">
+                5 minutes
+            </div>
+
+            <input
+                type="number"
+                id="construction5m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+
+        <div class="speedup-row speedup-1h">
+
+            <div class="speedup-label">
+                1 hour
+            </div>
+
+            <input
+                type="number"
+                id="construction1h"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         TROOPS
+         ========================= -->
+
+    <div class="category-card">
+
+        <h2 class="category-title">
+
+            🪖 Troop Speedups
+
+        </h2>
+
+
+        <div class="speedup-row speedup-1m">
+
+            <div class="speedup-label">
+                1 minute
+            </div>
+
+            <input
+                type="number"
+                id="troop1m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+
+        <div class="speedup-row speedup-5m">
+
+            <div class="speedup-label">
+                5 minutes
+            </div>
+
+            <input
+                type="number"
+                id="troop5m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+
+        <div class="speedup-row speedup-1h">
+
+            <div class="speedup-label">
+                1 hour
+            </div>
+
+            <input
+                type="number"
+                id="troop1h"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         RESEARCH
+         ========================= -->
+
+    <div class="category-card">
+
+        <h2 class="category-title">
+
+            📖 Research Speedups
+
+        </h2>
+
+
+        <div class="speedup-row speedup-1m">
+
+            <div class="speedup-label">
+                1 minute
+            </div>
+
+            <input
+                type="number"
+                id="research1m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+
+        <div class="speedup-row speedup-5m">
+
+            <div class="speedup-label">
+                5 minutes
+            </div>
+
+            <input
+                type="number"
+                id="research5m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+
+        <div class="speedup-row speedup-1h">
+
+            <div class="speedup-label">
+                1 hour
+            </div>
+
+            <input
+                type="number"
+                id="research1h"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         CALCULATE
+         ========================= -->
+
+    <button
+        class="calculate-button"
+        onclick="calculate()"
+    >
+        CALCULATE
+    </button>
+
+
+
+    <!-- =========================
          RESULTS
          ========================= -->
 
@@ -276,30 +787,32 @@
             📊 Results
         </div>
 
-         
-         <!-- TIME DISPLAY TOGGLE -->
-         
-         <div class="time-toggle">
-         
-             <button
-                 id="daysToggle"
-                 class="toggle-button active"
-                 onclick="setTimeFormat('days')"
-             >
-                 Days
-             </button>
-         
-             <button
-                 id="hoursToggle"
-                 class="toggle-button"
-                 onclick="setTimeFormat('hours')"
-             >
-                 Hours
-             </button>
-         
-         </div>
 
-        <!-- GENERAL -->
+        <!-- TIME FORMAT TOGGLE -->
+
+        <div class="time-toggle">
+
+            <button
+                id="daysToggle"
+                class="toggle-button active"
+                onclick="setTimeFormat('days')"
+            >
+                Days
+            </button>
+
+            <button
+                id="hoursToggle"
+                class="toggle-button"
+                onclick="setTimeFormat('hours')"
+            >
+                Hours
+            </button>
+
+        </div>
+
+
+
+        <!-- GENERAL RESULT -->
 
         <div class="result-card general-result">
 
@@ -315,13 +828,14 @@
                 class="result-time"
                 id="generalResult"
             >
-                0 h 00 min
+                0 d 00 h 00 min
             </div>
 
         </div>
 
 
-        <!-- CONSTRUCTION -->
+
+        <!-- CONSTRUCTION RESULT -->
 
         <div class="result-card">
 
@@ -333,13 +847,14 @@
                 class="result-time"
                 id="constructionResult"
             >
-                0 h 00 min
+                0 d 00 h 00 min
             </div>
 
         </div>
 
 
-        <!-- TROOPS -->
+
+        <!-- TROOP RESULT -->
 
         <div class="result-card">
 
@@ -351,13 +866,14 @@
                 class="result-time"
                 id="troopResult"
             >
-                0 h 00 min
+                0 d 00 h 00 min
             </div>
 
         </div>
 
 
-        <!-- RESEARCH -->
+
+        <!-- RESEARCH RESULT -->
 
         <div class="result-card">
 
@@ -369,7 +885,7 @@
                 class="result-time"
                 id="researchResult"
             >
-                0 h 00 min
+                0 d 00 h 00 min
             </div>
 
         </div>
@@ -381,6 +897,16 @@
 
 
 <script>
+
+
+/* =========================
+   CURRENT TIME FORMAT
+
+   DAYS IS THE DEFAULT
+   ========================= */
+
+let timeFormat = "days";
+
 
 
 /* =========================
@@ -398,18 +924,15 @@ function value(id) {
 
 
 /* =========================
-   CURRENT TIME FORMAT
-   ========================= */
-
-let timeFormat = "days";
-
-
-
-/* =========================
    FORMAT TIME
    ========================= */
 
 function formatTime(totalMinutes) {
+
+
+    /* =====================
+       DAYS FORMAT
+       ===================== */
 
     if (timeFormat === "days") {
 
@@ -434,10 +957,14 @@ function formatTime(totalMinutes) {
             String(minutes).padStart(2, "0") +
             " min"
         );
+
     }
 
 
-    /* HOURS FORMAT */
+
+    /* =====================
+       HOURS FORMAT
+       ===================== */
 
     const hours =
         Math.floor(totalMinutes / 60);
@@ -483,14 +1010,15 @@ function setTimeFormat(format) {
 
 
     /*
-     * Recalculate the displayed
-     * results without changing
-     * any inputs.
+     * Reformat existing results
+     * immediately.
      */
 
     updateResults();
 
 }
+
+
 
 /* =========================
    CALCULATE
@@ -528,14 +1056,17 @@ function updateResults() {
 
 
     /*
-     * Everything is calculated
-     * in minutes.
+     * EVERYTHING IS CALCULATED
+     * IN MINUTES.
      *
-     * Nothing is rounded or discarded.
+     * NOTHING IS ROUNDED.
+     * NOTHING IS DISCARDED.
      */
 
 
-    /* GENERAL */
+    /* =====================
+       GENERAL
+       ===================== */
 
     const generalMinutes =
 
@@ -551,7 +1082,9 @@ function updateResults() {
 
 
 
-    /* CONSTRUCTION */
+    /* =====================
+       CONSTRUCTION
+       ===================== */
 
     const constructionMinutes =
 
@@ -563,7 +1096,9 @@ function updateResults() {
 
 
 
-    /* TROOPS */
+    /* =====================
+       TROOPS
+       ===================== */
 
     const troopMinutes =
 
@@ -575,7 +1110,9 @@ function updateResults() {
 
 
 
-    /* RESEARCH */
+    /* =====================
+       RESEARCH
+       ===================== */
 
     const researchMinutes =
 
@@ -587,7 +1124,9 @@ function updateResults() {
 
 
 
-    /* DISPLAY RESULTS */
+    /* =====================
+       DISPLAY RESULTS
+       ===================== */
 
     document.getElementById(
         "generalResult"
@@ -615,3 +1154,6 @@ function updateResults() {
 }
 
 </script>
+
+</body>
+</html>
