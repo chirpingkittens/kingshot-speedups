@@ -7,6 +7,7 @@
 <title>Kingshot Speedup Calculator</title>
 
 <style>
+
     * {
         box-sizing: border-box;
     }
@@ -14,294 +15,790 @@
     body {
         margin: 0;
         font-family: Arial, Helvetica, sans-serif;
-        background: #f3f4f6;
-        color: #1f2937;
+        color: #30281f;
+
+        background:
+            linear-gradient(
+                #f6f0e2,
+                #e8dcc2
+            );
+
+        min-height: 100vh;
     }
+
 
     .container {
         width: 100%;
         max-width: 650px;
         margin: 0 auto;
-        padding: 20px 14px 40px;
+        padding: 18px 12px 40px;
     }
+
+
+    /* =========================
+       HEADER
+       ========================= */
 
     header {
         text-align: center;
-        margin-bottom: 24px;
+        margin-bottom: 22px;
     }
 
     h1 {
         margin: 0;
+
         font-size: 28px;
+        font-weight: 800;
+
+        color: #4a3521;
+
+        text-shadow:
+            0 1px 0 #fff;
     }
 
     .subtitle {
         margin-top: 6px;
-        color: #6b7280;
+
+        color: #756653;
+
         font-size: 14px;
     }
 
-    .card {
-        background: white;
-        border-radius: 14px;
-        padding: 18px;
-        margin-bottom: 18px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+    /* =========================
+       CATEGORY CARDS
+       ========================= */
+
+    .category-card {
+        background: rgba(255, 252, 244, 0.97);
+
+        border: 1px solid #c9b58f;
+
+        border-radius: 12px;
+
+        padding: 14px;
+
+        margin-bottom: 14px;
+
+        box-shadow:
+            0 2px 5px rgba(60, 40, 15, 0.15),
+            inset 0 1px rgba(255,255,255,0.8);
     }
 
-    .card h2 {
-        margin: 0 0 16px;
+
+    .category-title {
+        margin: 0 0 12px;
+
+        padding-bottom: 9px;
+
         font-size: 20px;
+        font-weight: 800;
+
+        color: #4a3521;
+
+        border-bottom: 1px solid #d7c7a7;
     }
+
+
+    /* General speedup symbol */
+
+    .general-icon {
+        color: #3d73b9;
+
+        font-weight: 900;
+
+        letter-spacing: -3px;
+
+        margin-right: 5px;
+    }
+
+
+    /* =========================
+       SPEEDUP ROWS
+       ========================= */
 
     .speedup-row {
         display: grid;
-        grid-template-columns: 1fr 120px;
-        gap: 12px;
+
+        grid-template-columns: 1fr 115px;
+
+        gap: 10px;
+
         align-items: center;
-        margin-bottom: 10px;
+
+        margin-bottom: 7px;
+
+        padding: 8px 9px;
+
+        border-radius: 7px;
+
+        background: #f2eee6;
+
+        border: 1px solid #ddd4c3;
     }
+
 
     .speedup-row:last-child {
         margin-bottom: 0;
     }
 
+
     .speedup-label {
-        font-weight: 600;
+        font-weight: 700;
+
+        font-size: 15px;
     }
+
+
+    /* =========================
+       SPEEDUP TEXT COLORS
+       ========================= */
+
+    .speedup-1m .speedup-label {
+        color: #55504a;
+    }
+
+
+    .speedup-5m .speedup-label {
+        color: #319052;
+    }
+
+
+    .speedup-1h .speedup-label {
+        color: #3570b4;
+    }
+
+
+    .speedup-3h .speedup-label {
+        color: #8150a3;
+    }
+
+
+    .speedup-8h .speedup-label {
+        color: #d17026;
+    }
+
+
+    /* =========================
+       INPUTS
+       ========================= */
 
     input {
         width: 100%;
-        padding: 10px 9px;
-        border: 1px solid #d1d5db;
-        border-radius: 7px;
+
+        padding: 9px 8px;
+
+        border: 1px solid #b9ad98;
+
+        border-radius: 6px;
+
         font-size: 16px;
+
+        font-weight: 700;
+
         text-align: right;
-        background: #fff;
+
+        background: #fffdf8;
+
+        color: #30281f;
     }
+
 
     input:focus {
         outline: none;
-        border-color: #6366f1;
-        box-shadow: 0 0 0 2px rgba(99,102,241,0.15);
+
+        border-color: #9b6b2f;
+
+        box-shadow:
+            0 0 0 2px rgba(155,107,47,0.15);
     }
+
+
+    /* =========================
+       CALCULATE BUTTON
+       ========================= */
 
     .calculate-button {
         width: 100%;
-        border: none;
-        border-radius: 10px;
+
+        border: 1px solid #68430f;
+
+        border-radius: 9px;
+
         padding: 15px;
+
         font-size: 18px;
+
         font-weight: bold;
-        color: white;
-        background: #4f46e5;
+
+        color: #fff8e8;
+
+        background:
+            linear-gradient(
+                #b98032,
+                #8d5d1c
+            );
+
+        box-shadow:
+            0 2px 4px rgba(0,0,0,0.2),
+            inset 0 1px rgba(255,255,255,0.35);
+
         cursor: pointer;
-        margin-bottom: 20px;
+
+        margin: 4px 0 20px;
     }
 
+
     .calculate-button:hover {
-        background: #4338ca;
+        background:
+            linear-gradient(
+                #c58c3a,
+                #986522
+            );
     }
+
+
+    .calculate-button:active {
+        transform: translateY(1px);
+    }
+
+
+    /* =========================
+       RESULTS
+       ========================= */
 
     .results {
         display: none;
     }
 
-    .result-card {
-        background: white;
-        border-radius: 14px;
-        padding: 18px;
-        margin-bottom: 14px;
+
+    .results-title {
         text-align: center;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+        margin: 5px 0 12px;
+
+        font-size: 22px;
+
+        font-weight: 800;
+
+        color: #4a3521;
     }
+
+
+    .result-card {
+        background: rgba(255, 252, 244, 0.97);
+
+        border: 1px solid #c9b58f;
+
+        border-radius: 12px;
+
+        padding: 15px;
+
+        margin-bottom: 11px;
+
+        text-align: center;
+
+        box-shadow:
+            0 2px 5px rgba(60,40,15,0.15);
+    }
+
 
     .result-title {
         font-size: 17px;
-        font-weight: bold;
-        margin-bottom: 7px;
+
+        font-weight: 800;
+
+        color: #66523a;
+
+        margin-bottom: 5px;
     }
+
 
     .result-time {
         font-size: 32px;
-        font-weight: 800;
-        color: #312e81;
+
+        font-weight: 900;
+
+        color: #4a3521;
+
         line-height: 1.2;
     }
 
-    .general-result .result-time {
-        color: #7c3aed;
+
+    /* General result */
+
+    .general-result .result-title {
+        color: #3570b4;
     }
 
+
+    .general-result .result-time {
+        color: #3570b4;
+    }
+
+
+    /* =========================
+       MOBILE
+       ========================= */
+
     @media (max-width: 450px) {
+
         .container {
-            padding: 16px 10px 30px;
+            padding: 14px 9px 30px;
         }
+
 
         h1 {
             font-size: 24px;
         }
 
-        .card {
-            padding: 15px;
+
+        .category-card {
+            padding: 12px;
         }
 
+
         .speedup-row {
-            grid-template-columns: 1fr 105px;
+            grid-template-columns: 1fr 100px;
         }
+
 
         .result-time {
             font-size: 28px;
         }
     }
+
 </style>
 </head>
+
 
 <body>
 
 <div class="container">
 
+
+    <!-- =========================
+         HEADER
+         ========================= -->
+
     <header>
-        <h1>⚔️ Kingshot Speedup Calculator</h1>
+
+        <h1>
+            ⚔️ Kingshot Speedup Calculator
+        </h1>
+
         <div class="subtitle">
             Enter your speedups to see your total time
         </div>
+
     </header>
 
 
-    <!-- CONSTRUCTION -->
 
-    <div class="card">
-        <h2>🏗️ Construction Speedups</h2>
+    <!-- =========================
+         GENERAL
+         ========================= -->
 
-        <div class="speedup-row">
-            <div class="speedup-label">1 minute</div>
-            <input type="number" id="construction1m" min="0" step="1" value="0">
+    <div class="category-card">
+
+        <h2 class="category-title">
+
+            <span class="general-icon">❯❯</span>
+
+            General Speedups
+
+        </h2>
+
+
+        <div class="speedup-row speedup-1m">
+
+            <div class="speedup-label">
+                1 minute
+            </div>
+
+            <input
+                type="number"
+                id="general1m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
         </div>
 
-        <div class="speedup-row">
-            <div class="speedup-label">5 minutes</div>
-            <input type="number" id="construction5m" min="0" step="1" value="0">
+
+        <div class="speedup-row speedup-5m">
+
+            <div class="speedup-label">
+                5 minutes
+            </div>
+
+            <input
+                type="number"
+                id="general5m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
         </div>
 
-        <div class="speedup-row">
-            <div class="speedup-label">1 hour</div>
-            <input type="number" id="construction1h" min="0" step="1" value="0">
+
+        <div class="speedup-row speedup-1h">
+
+            <div class="speedup-label">
+                1 hour
+            </div>
+
+            <input
+                type="number"
+                id="general1h"
+                min="0"
+                step="1"
+                value="0"
+            >
+
         </div>
+
+
+        <div class="speedup-row speedup-3h">
+
+            <div class="speedup-label">
+                3 hours
+            </div>
+
+            <input
+                type="number"
+                id="general3h"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
+
+        <div class="speedup-row speedup-8h">
+
+            <div class="speedup-label">
+                8 hours
+            </div>
+
+            <input
+                type="number"
+                id="general8h"
+                min="0"
+                step="1"
+                value="0"
+            >
+
+        </div>
+
     </div>
 
 
-    <!-- RESEARCH -->
 
-    <div class="card">
-        <h2>🔬 Research Speedups</h2>
+    <!-- =========================
+         CONSTRUCTION
+         ========================= -->
 
-        <div class="speedup-row">
-            <div class="speedup-label">1 minute</div>
-            <input type="number" id="research1m" min="0" step="1" value="0">
+    <div class="category-card">
+
+        <h2 class="category-title">
+
+            🔨 Construction Speedups
+
+        </h2>
+
+
+        <div class="speedup-row speedup-1m">
+
+            <div class="speedup-label">
+                1 minute
+            </div>
+
+            <input
+                type="number"
+                id="construction1m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
         </div>
 
-        <div class="speedup-row">
-            <div class="speedup-label">5 minutes</div>
-            <input type="number" id="research5m" min="0" step="1" value="0">
+
+        <div class="speedup-row speedup-5m">
+
+            <div class="speedup-label">
+                5 minutes
+            </div>
+
+            <input
+                type="number"
+                id="construction5m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
         </div>
 
-        <div class="speedup-row">
-            <div class="speedup-label">1 hour</div>
-            <input type="number" id="research1h" min="0" step="1" value="0">
+
+        <div class="speedup-row speedup-1h">
+
+            <div class="speedup-label">
+                1 hour
+            </div>
+
+            <input
+                type="number"
+                id="construction1h"
+                min="0"
+                step="1"
+                value="0"
+            >
+
         </div>
+
     </div>
 
 
-    <!-- TROOPS -->
 
-    <div class="card">
-        <h2>⚔️ Troop Speedups</h2>
+    <!-- =========================
+         TROOPS
+         ========================= -->
 
-        <div class="speedup-row">
-            <div class="speedup-label">1 minute</div>
-            <input type="number" id="troop1m" min="0" step="1" value="0">
+    <div class="category-card">
+
+        <h2 class="category-title">
+
+            🪖 Troop Speedups
+
+        </h2>
+
+
+        <div class="speedup-row speedup-1m">
+
+            <div class="speedup-label">
+                1 minute
+            </div>
+
+            <input
+                type="number"
+                id="troop1m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
         </div>
 
-        <div class="speedup-row">
-            <div class="speedup-label">5 minutes</div>
-            <input type="number" id="troop5m" min="0" step="1" value="0">
+
+        <div class="speedup-row speedup-5m">
+
+            <div class="speedup-label">
+                5 minutes
+            </div>
+
+            <input
+                type="number"
+                id="troop5m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
         </div>
 
-        <div class="speedup-row">
-            <div class="speedup-label">1 hour</div>
-            <input type="number" id="troop1h" min="0" step="1" value="0">
+
+        <div class="speedup-row speedup-1h">
+
+            <div class="speedup-label">
+                1 hour
+            </div>
+
+            <input
+                type="number"
+                id="troop1h"
+                min="0"
+                step="1"
+                value="0"
+            >
+
         </div>
+
     </div>
 
 
-    <!-- GENERAL -->
 
-    <div class="card">
-        <h2>🟣 General Speedups</h2>
+    <!-- =========================
+         RESEARCH
+         ========================= -->
 
-        <div class="speedup-row">
-            <div class="speedup-label">1 minute</div>
-            <input type="number" id="general1m" min="0" step="1" value="0">
+    <div class="category-card">
+
+        <h2 class="category-title">
+
+            📖 Research Speedups
+
+        </h2>
+
+
+        <div class="speedup-row speedup-1m">
+
+            <div class="speedup-label">
+                1 minute
+            </div>
+
+            <input
+                type="number"
+                id="research1m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
         </div>
 
-        <div class="speedup-row">
-            <div class="speedup-label">5 minutes</div>
-            <input type="number" id="general5m" min="0" step="1" value="0">
+
+        <div class="speedup-row speedup-5m">
+
+            <div class="speedup-label">
+                5 minutes
+            </div>
+
+            <input
+                type="number"
+                id="research5m"
+                min="0"
+                step="1"
+                value="0"
+            >
+
         </div>
 
-        <div class="speedup-row">
-            <div class="speedup-label">1 hour</div>
-            <input type="number" id="general1h" min="0" step="1" value="0">
+
+        <div class="speedup-row speedup-1h">
+
+            <div class="speedup-label">
+                1 hour
+            </div>
+
+            <input
+                type="number"
+                id="research1h"
+                min="0"
+                step="1"
+                value="0"
+            >
+
         </div>
 
-        <div class="speedup-row">
-            <div class="speedup-label">3 hours</div>
-            <input type="number" id="general3h" min="0" step="1" value="0">
-        </div>
-
-        <div class="speedup-row">
-            <div class="speedup-label">8 hours</div>
-            <input type="number" id="general8h" min="0" step="1" value="0">
-        </div>
     </div>
 
 
-    <button class="calculate-button" onclick="calculate()">
+
+    <!-- =========================
+         CALCULATE
+         ========================= -->
+
+    <button
+        class="calculate-button"
+        onclick="calculate()"
+    >
         CALCULATE
     </button>
 
 
-    <!-- RESULTS -->
 
-    <div class="results" id="results">
+    <!-- =========================
+         RESULTS
+         ========================= -->
 
-        <div class="result-card">
-            <div class="result-title">🏗️ Construction</div>
-            <div class="result-time" id="constructionResult">
-                0 h 00 min
-            </div>
+    <div
+        class="results"
+        id="results"
+    >
+
+        <div class="results-title">
+            📊 Results
         </div>
 
-        <div class="result-card">
-            <div class="result-title">🔬 Research</div>
-            <div class="result-time" id="researchResult">
-                0 h 00 min
-            </div>
-        </div>
 
-        <div class="result-card">
-            <div class="result-title">⚔️ Troops</div>
-            <div class="result-time" id="troopResult">
-                0 h 00 min
-            </div>
-        </div>
+        <!-- GENERAL -->
 
         <div class="result-card general-result">
-            <div class="result-title">🟣 General</div>
-            <div class="result-time" id="generalResult">
+
+            <div class="result-title">
+
+                <span class="general-icon">❯❯</span>
+
+                General
+
+            </div>
+
+            <div
+                class="result-time"
+                id="generalResult"
+            >
                 0 h 00 min
             </div>
+
+        </div>
+
+
+        <!-- CONSTRUCTION -->
+
+        <div class="result-card">
+
+            <div class="result-title">
+                🔨 Construction
+            </div>
+
+            <div
+                class="result-time"
+                id="constructionResult"
+            >
+                0 h 00 min
+            </div>
+
+        </div>
+
+
+        <!-- TROOPS -->
+
+        <div class="result-card">
+
+            <div class="result-title">
+                🪖 Troops
+            </div>
+
+            <div
+                class="result-time"
+                id="troopResult"
+            >
+                0 h 00 min
+            </div>
+
+        </div>
+
+
+        <!-- RESEARCH -->
+
+        <div class="result-card">
+
+            <div class="result-title">
+                📖 Research
+            </div>
+
+            <div
+                class="result-time"
+                id="researchResult"
+            >
+                0 h 00 min
+            </div>
+
         </div>
 
     </div>
@@ -309,17 +806,36 @@
 </div>
 
 
+
 <script>
 
+
+/* =========================
+   GET INPUT VALUE
+   ========================= */
+
 function value(id) {
-    return Number(document.getElementById(id).value) || 0;
+
+    return Number(
+        document.getElementById(id).value
+    ) || 0;
+
 }
 
 
+
+/* =========================
+   FORMAT TIME
+   ========================= */
+
 function formatTime(totalMinutes) {
 
-    const hours = Math.floor(totalMinutes / 60);
-    const minutes = totalMinutes % 60;
+    const hours =
+        Math.floor(totalMinutes / 60);
+
+    const minutes =
+        totalMinutes % 60;
+
 
     return (
         hours.toLocaleString() +
@@ -327,67 +843,125 @@ function formatTime(totalMinutes) {
         String(minutes).padStart(2, "0") +
         " min"
     );
+
 }
 
 
+
+/* =========================
+   CALCULATE
+   ========================= */
+
 function calculate() {
 
+
     /*
-     * All calculations are performed in MINUTES.
+     * Everything is calculated
+     * in minutes.
+     *
      * Nothing is rounded or discarded.
      */
 
 
-    // Construction
-    const constructionMinutes =
-        value("construction1m") * 1 +
-        value("construction5m") * 5 +
-        value("construction1h") * 60;
+    /* GENERAL */
 
-
-    // Research
-    const researchMinutes =
-        value("research1m") * 1 +
-        value("research5m") * 5 +
-        value("research1h") * 60;
-
-
-    // Troops
-    const troopMinutes =
-        value("troop1m") * 1 +
-        value("troop5m") * 5 +
-        value("troop1h") * 60;
-
-
-    // General
     const generalMinutes =
+
         value("general1m") * 1 +
+
         value("general5m") * 5 +
+
         value("general1h") * 60 +
+
         value("general3h") * 180 +
+
         value("general8h") * 480;
 
 
-    document.getElementById("constructionResult").textContent =
-        formatTime(constructionMinutes);
 
-    document.getElementById("researchResult").textContent =
-        formatTime(researchMinutes);
+    /* CONSTRUCTION */
 
-    document.getElementById("troopResult").textContent =
-        formatTime(troopMinutes);
+    const constructionMinutes =
 
-    document.getElementById("generalResult").textContent =
+        value("construction1m") * 1 +
+
+        value("construction5m") * 5 +
+
+        value("construction1h") * 60;
+
+
+
+    /* TROOPS */
+
+    const troopMinutes =
+
+        value("troop1m") * 1 +
+
+        value("troop5m") * 5 +
+
+        value("troop1h") * 60;
+
+
+
+    /* RESEARCH */
+
+    const researchMinutes =
+
+        value("research1m") * 1 +
+
+        value("research5m") * 5 +
+
+        value("research1h") * 60;
+
+
+
+    /* DISPLAY RESULTS */
+
+    document.getElementById(
+        "generalResult"
+    ).textContent =
         formatTime(generalMinutes);
 
 
-    document.getElementById("results").style.display = "block";
+    document.getElementById(
+        "constructionResult"
+    ).textContent =
+        formatTime(constructionMinutes);
 
-    // Scroll results into view
-    document.getElementById("results").scrollIntoView({
+
+    document.getElementById(
+        "troopResult"
+    ).textContent =
+        formatTime(troopMinutes);
+
+
+    document.getElementById(
+        "researchResult"
+    ).textContent =
+        formatTime(researchMinutes);
+
+
+
+    /* SHOW RESULTS */
+
+    document.getElementById(
+        "results"
+    ).style.display = "block";
+
+
+
+    /* SCROLL TO RESULTS */
+
+    document.getElementById(
+        "results"
+    ).scrollIntoView({
+
         behavior: "smooth",
+
         block: "start"
+
     });
+
 }
 
 </script>
