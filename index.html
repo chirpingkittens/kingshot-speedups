@@ -1,295 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kingshot Speedup Calculator</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<title>Kingshot Speedup Calculator</title>
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f2f4f7;
-            color: #222;
-        }
+<style>
+    * {
+        box-sizing: border-box;
+    }
 
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f3f4f6;
+        color: #1f2937;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 650px;
+        margin: 0 auto;
+        padding: 20px 14px 40px;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 28px;
+    }
+
+    .subtitle {
+        margin-top: 6px;
+        color: #6b7280;
+        font-size: 14px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 14px;
+        padding: 18px;
+        margin-bottom: 18px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+        margin: 0 0 16px;
+        font-size: 20px;
+    }
+
+    .speedup-row {
+        display: grid;
+        grid-template-columns: 1fr 120px;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .speedup-row:last-child {
+        margin-bottom: 0;
+    }
+
+    .speedup-label {
+        font-weight: 600;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px 9px;
+        border: 1px solid #d1d5db;
+        border-radius: 7px;
+        font-size: 16px;
+        text-align: right;
+        background: #fff;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #6366f1;
+        box-shadow: 0 0 0 2px rgba(99,102,241,0.15);
+    }
+
+    .calculate-button {
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        padding: 15px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        background: #4f46e5;
+        cursor: pointer;
+        margin-bottom: 20px;
+    }
+
+    .calculate-button:hover {
+        background: #4338ca;
+    }
+
+    .results {
+        display: none;
+    }
+
+    .result-card {
+        background: white;
+        border-radius: 14px;
+        padding: 18px;
+        margin-bottom: 14px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .result-title {
+        font-size: 17px;
+        font-weight: bold;
+        margin-bottom: 7px;
+    }
+
+    .result-time {
+        font-size: 32px;
+        font-weight: 800;
+        color: #312e81;
+        line-height: 1.2;
+    }
+
+    .general-result .result-time {
+        color: #7c3aed;
+    }
+
+    @media (max-width: 450px) {
         .container {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 20px;
+            padding: 16px 10px 30px;
         }
 
         h1 {
-            text-align: center;
-            margin-bottom: 5px;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 25px;
+            font-size: 24px;
         }
 
         .card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 15px;
         }
 
-        h2 {
-            margin-top: 0;
-            font-size: 20px;
-        }
-
-        .time-grid,
         .speedup-row {
-            display: grid;
-            grid-template-columns: 1fr 120px;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 10px;
+            grid-template-columns: 1fr 105px;
         }
 
-        label {
-            font-weight: 600;
+        .result-time {
+            font-size: 28px;
         }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
-
-        .category {
-            margin-top: 20px;
-        }
-
-        .category h3 {
-            margin-bottom: 12px;
-        }
-
-        button {
-            width: 100%;
-            padding: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            background: #4f46e5;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #4338ca;
-        }
-
-        .result {
-            background: #eef2ff;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 12px;
-        }
-
-        .result-title {
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        .big-number {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 5px;
-        }
-
-        .small {
-            color: #555;
-            margin-top: 4px;
-        }
-
-        @media (max-width: 500px) {
-            .container {
-                padding: 12px;
-            }
-
-            .card {
-                padding: 15px;
-            }
-
-            .time-grid,
-            .speedup-row {
-                grid-template-columns: 1fr 100px;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <h1>⚔️ Kingshot Speedup Calculator</h1>
-    <div class="subtitle">
-        Calculate the total time represented by your speedups
-    </div>
+    <header>
+        <h1>⚔️ Kingshot Speedup Calculator</h1>
+        <div class="subtitle">
+            Enter your speedups to see your total time
+        </div>
+    </header>
+
+
+    <!-- CONSTRUCTION -->
 
     <div class="card">
-        <h2>⏱️ Time Required</h2>
+        <h2>🏗️ Construction Speedups</h2>
 
-        <div class="time-grid">
-            <label for="days">Days</label>
-            <input type="number" id="days" min="0" value="0">
+        <div class="speedup-row">
+            <div class="speedup-label">1 minute</div>
+            <input type="number" id="construction1m" min="0" step="1" value="0">
         </div>
 
-        <div class="time-grid">
-            <label for="hours">Hours</label>
-            <input type="number" id="hours" min="0" value="0">
+        <div class="speedup-row">
+            <div class="speedup-label">5 minutes</div>
+            <input type="number" id="construction5m" min="0" step="1" value="0">
         </div>
 
-        <div class="time-grid">
-            <label for="minutes">Minutes</label>
-            <input type="number" id="minutes" min="0" value="0">
-        </div>
-
-        <div class="time-grid">
-            <label for="seconds">Seconds</label>
-            <input type="number" id="seconds" min="0" value="0">
+        <div class="speedup-row">
+            <div class="speedup-label">1 hour</div>
+            <input type="number" id="construction1h" min="0" step="1" value="0">
         </div>
     </div>
 
+
+    <!-- RESEARCH -->
 
     <div class="card">
-        <h2>⚡ Speedups</h2>
+        <h2>🔬 Research Speedups</h2>
 
-        <div class="category">
-            <h3>🟣 General</h3>
-
-            <div class="speedup-row">
-                <label>1 minute</label>
-                <input type="number" id="general1m" min="0" value="0">
-            </div>
-
-            <div class="speedup-row">
-                <label>5 minutes</label>
-                <input type="number" id="general5m" min="0" value="0">
-            </div>
-
-            <div class="speedup-row">
-                <label>1 hour</label>
-                <input type="number" id="general1h" min="0" value="0">
-            </div>
-
-            <div class="speedup-row">
-                <label>3 hours</label>
-                <input type="number" id="general3h" min="0" value="0">
-            </div>
-
-            <div class="speedup-row">
-                <label>8 hours</label>
-                <input type="number" id="general8h" min="0" value="0">
-            </div>
+        <div class="speedup-row">
+            <div class="speedup-label">1 minute</div>
+            <input type="number" id="research1m" min="0" step="1" value="0">
         </div>
 
-
-        <div class="category">
-            <h3>🏗️ Construction</h3>
-
-            <div class="speedup-row">
-                <label>1 minute</label>
-                <input type="number" id="construction1m" min="0" value="0">
-            </div>
-
-            <div class="speedup-row">
-                <label>5 minutes</label>
-                <input type="number" id="construction5m" min="0" value="0">
-            </div>
-
-            <div class="speedup-row">
-                <label>1 hour</label>
-                <input type="number" id="construction1h" min="0" value="0">
-            </div>
+        <div class="speedup-row">
+            <div class="speedup-label">5 minutes</div>
+            <input type="number" id="research5m" min="0" step="1" value="0">
         </div>
 
-
-        <div class="category">
-            <h3>🔬 Research</h3>
-
-            <div class="speedup-row">
-                <label>1 minute</label>
-                <input type="number" id="research1m" min="0" value="0">
-            </div>
-
-            <div class="speedup-row">
-                <label>5 minutes</label>
-                <input type="number" id="research5m" min="0" value="0">
-            </div>
-
-            <div class="speedup-row">
-                <label>1 hour</label>
-                <input type="number" id="research1h" min="0" value="0">
-            </div>
+        <div class="speedup-row">
+            <div class="speedup-label">1 hour</div>
+            <input type="number" id="research1h" min="0" step="1" value="0">
         </div>
-
-
-        <div class="category">
-            <h3>⚔️ Troops</h3>
-
-            <div class="speedup-row">
-                <label>1 minute</label>
-                <input type="number" id="troop1m" min="0" value="0">
-            </div>
-
-            <div class="speedup-row">
-                <label>5 minutes</label>
-                <input type="number" id="troop5m" min="0" value="0">
-            </div>
-
-            <div class="speedup-row">
-                <label>1 hour</label>
-                <input type="number" id="troop1h" min="0" value="0">
-            </div>
-        </div>
-
     </div>
 
 
-    <button onclick="calculate()">CALCULATE</button>
+    <!-- TROOPS -->
 
+    <div class="card">
+        <h2>⚔️ Troop Speedups</h2>
 
-    <div class="card" id="results" style="display:none; margin-top:20px;">
-
-        <h2>📊 Results</h2>
-
-        <div class="result">
-            <div class="result-title">General Speedups</div>
-            <div class="big-number" id="generalResult"></div>
-            <div class="small" id="generalDays"></div>
+        <div class="speedup-row">
+            <div class="speedup-label">1 minute</div>
+            <input type="number" id="troop1m" min="0" step="1" value="0">
         </div>
 
-        <div class="result">
-            <div class="result-title">Construction Speedups</div>
-            <div class="big-number" id="constructionResult"></div>
-            <div class="small" id="constructionDays"></div>
+        <div class="speedup-row">
+            <div class="speedup-label">5 minutes</div>
+            <input type="number" id="troop5m" min="0" step="1" value="0">
         </div>
 
-        <div class="result">
-            <div class="result-title">Research Speedups</div>
-            <div class="big-number" id="researchResult"></div>
-            <div class="small" id="researchDays"></div>
+        <div class="speedup-row">
+            <div class="speedup-label">1 hour</div>
+            <input type="number" id="troop1h" min="0" step="1" value="0">
+        </div>
+    </div>
+
+
+    <!-- GENERAL -->
+
+    <div class="card">
+        <h2>🟣 General Speedups</h2>
+
+        <div class="speedup-row">
+            <div class="speedup-label">1 minute</div>
+            <input type="number" id="general1m" min="0" step="1" value="0">
         </div>
 
-        <div class="result">
-            <div class="result-title">Troop Speedups</div>
-            <div class="big-number" id="troopResult"></div>
-            <div class="small" id="troopDays"></div>
+        <div class="speedup-row">
+            <div class="speedup-label">5 minutes</div>
+            <input type="number" id="general5m" min="0" step="1" value="0">
+        </div>
+
+        <div class="speedup-row">
+            <div class="speedup-label">1 hour</div>
+            <input type="number" id="general1h" min="0" step="1" value="0">
+        </div>
+
+        <div class="speedup-row">
+            <div class="speedup-label">3 hours</div>
+            <input type="number" id="general3h" min="0" step="1" value="0">
+        </div>
+
+        <div class="speedup-row">
+            <div class="speedup-label">8 hours</div>
+            <input type="number" id="general8h" min="0" step="1" value="0">
+        </div>
+    </div>
+
+
+    <button class="calculate-button" onclick="calculate()">
+        CALCULATE
+    </button>
+
+
+    <!-- RESULTS -->
+
+    <div class="results" id="results">
+
+        <div class="result-card">
+            <div class="result-title">🏗️ Construction</div>
+            <div class="result-time" id="constructionResult">
+                0 h 00 min
+            </div>
+        </div>
+
+        <div class="result-card">
+            <div class="result-title">🔬 Research</div>
+            <div class="result-time" id="researchResult">
+                0 h 00 min
+            </div>
+        </div>
+
+        <div class="result-card">
+            <div class="result-title">⚔️ Troops</div>
+            <div class="result-time" id="troopResult">
+                0 h 00 min
+            </div>
+        </div>
+
+        <div class="result-card general-result">
+            <div class="result-title">🟣 General</div>
+            <div class="result-time" id="generalResult">
+                0 h 00 min
+            </div>
         </div>
 
     </div>
@@ -299,107 +311,83 @@
 
 <script>
 
-function getValue(id) {
+function value(id) {
     return Number(document.getElementById(id).value) || 0;
 }
 
 
-function formatTime(hours) {
+function formatTime(totalMinutes) {
 
-    const totalSeconds = Math.round(hours * 3600);
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
 
-    const days = Math.floor(totalSeconds / 86400);
-    const remainingAfterDays = totalSeconds % 86400;
-
-    const hrs = Math.floor(remainingAfterDays / 3600);
-    const remainingAfterHours = remainingAfterDays % 3600;
-
-    const mins = Math.floor(remainingAfterHours / 60);
-    const secs = remainingAfterHours % 60;
-
-    let result = "";
-
-    if (days > 0) result += days + "d ";
-    if (hrs > 0 || days > 0) result += hrs + "h ";
-    if (mins > 0 || hrs > 0 || days > 0) result += mins + "m ";
-    if (secs > 0 || result === "") result += secs + "s";
-
-    return result.trim();
+    return (
+        hours.toLocaleString() +
+        " h " +
+        String(minutes).padStart(2, "0") +
+        " min"
+    );
 }
 
 
 function calculate() {
 
-    // GENERAL
-    const generalMinutes =
-        getValue("general1m") * 1 +
-        getValue("general5m") * 5 +
-        getValue("general1h") * 60 +
-        getValue("general3h") * 180 +
-        getValue("general8h") * 480;
+    /*
+     * All calculations are performed in MINUTES.
+     * Nothing is rounded or discarded.
+     */
 
-    // CONSTRUCTION
+
+    // Construction
     const constructionMinutes =
-        getValue("construction1m") * 1 +
-        getValue("construction5m") * 5 +
-        getValue("construction1h") * 60;
+        value("construction1m") * 1 +
+        value("construction5m") * 5 +
+        value("construction1h") * 60;
 
-    // RESEARCH
+
+    // Research
     const researchMinutes =
-        getValue("research1m") * 1 +
-        getValue("research5m") * 5 +
-        getValue("research1h") * 60;
+        value("research1m") * 1 +
+        value("research5m") * 5 +
+        value("research1h") * 60;
 
-    // TROOPS
+
+    // Troops
     const troopMinutes =
-        getValue("troop1m") * 1 +
-        getValue("troop5m") * 5 +
-        getValue("troop1h") * 60;
+        value("troop1m") * 1 +
+        value("troop5m") * 5 +
+        value("troop1h") * 60;
 
 
-    const generalHours = generalMinutes / 60;
-    const constructionHours = constructionMinutes / 60;
-    const researchHours = researchMinutes / 60;
-    const troopHours = troopMinutes / 60;
-
-
-    document.getElementById("generalResult").textContent =
-        generalHours.toLocaleString(undefined, {
-            maximumFractionDigits: 2
-        }) + " hours";
-
-    document.getElementById("generalDays").textContent =
-        formatTime(generalHours);
+    // General
+    const generalMinutes =
+        value("general1m") * 1 +
+        value("general5m") * 5 +
+        value("general1h") * 60 +
+        value("general3h") * 180 +
+        value("general8h") * 480;
 
 
     document.getElementById("constructionResult").textContent =
-        constructionHours.toLocaleString(undefined, {
-            maximumFractionDigits: 2
-        }) + " hours";
-
-    document.getElementById("constructionDays").textContent =
-        formatTime(constructionHours);
-
+        formatTime(constructionMinutes);
 
     document.getElementById("researchResult").textContent =
-        researchHours.toLocaleString(undefined, {
-            maximumFractionDigits: 2
-        }) + " hours";
-
-    document.getElementById("researchDays").textContent =
-        formatTime(researchHours);
-
+        formatTime(researchMinutes);
 
     document.getElementById("troopResult").textContent =
-        troopHours.toLocaleString(undefined, {
-            maximumFractionDigits: 2
-        }) + " hours";
+        formatTime(troopMinutes);
 
-    document.getElementById("troopDays").textContent =
-        formatTime(troopHours);
+    document.getElementById("generalResult").textContent =
+        formatTime(generalMinutes);
 
 
     document.getElementById("results").style.display = "block";
+
+    // Scroll results into view
+    document.getElementById("results").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
 </script>
